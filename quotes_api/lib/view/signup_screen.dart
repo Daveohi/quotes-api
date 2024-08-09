@@ -189,7 +189,7 @@ class Signup extends StatelessWidget {
                                   controller.emailController.text,
                                   controller.passwordController.text,
                                 );
-                                Get.offAll(() => const HomeScreen());
+                                Get.offAll(() =>  HomeScreen());
                               } else {
                                 return _showalertdialog(
                                     'Dear user,  passwords are not similar.',
