@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 // import 'package:get/get_core/src/get_main.dart';
 // import 'package:get/get_navigation/get_navigation.dart';
 // import 'package:quotes/view/login_screen.dart';
@@ -8,6 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/colors.dart';
 import '../widget/custom_button.dart';
+import 'login_screen.dart';
+import 'signup_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -53,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Sign Up',
                   onPressed: () {
-                    // Get.offAll(() => const Signup());
+                    Get.offAll(() => const Signup());
                   },
                   width: 167.w,
                 ),
@@ -63,7 +66,7 @@ class SplashScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Login',
                   onPressed: () {
-                    // Get.offAll(() => SignIn());
+                    Get.offAll(() => SignIn());
                   },
                   fillColor: kGrey,
                   textColor: Colors.black,
