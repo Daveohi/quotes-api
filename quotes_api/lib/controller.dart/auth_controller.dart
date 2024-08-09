@@ -1,85 +1,117 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../utils/validator.dart';
 
-class SignupController extends GetxController {
-  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+class AuthController extends GetxController {
+  final Rx<File?> _imageFile = Rx<File?>(null);
 
-  //SIGN UP
-  final _emailcontroller = TextEditingController();
-  final _usernamecontroller = TextEditingController();
-  final _passwordcontroller = TextEditingController();
-  final _repasswordcontroller = TextEditingController();
+  File? get imageFile => _imageFile.value;
 
-  User? user;
+  void updateImage(File image) {
+    _imageFile.value = image;
+  }
 
-  TextEditingController get emailController => _emailcontroller;
-  TextEditingController get usernamecontroller => _usernamecontroller;
-  TextEditingController get passwordController => _passwordcontroller;
-  TextEditingController get repasswordController => _repasswordcontroller;
+  // Controllers for Sign Up
+  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _repasswordController = TextEditingController();
 
-//SIGN IN
-  final _signemailcontroller = TextEditingController();
-  final _signpasswordcontroller = TextEditingController();
+  TextEditingController get emailController => _emailController;
+  TextEditingController get usernameController => _usernameController;
+  TextEditingController get passwordController => _passwordController;
+  TextEditingController get repasswordController => _repasswordController;
 
-  TextEditingController get signemailController => _signemailcontroller;
-  TextEditingController get signpasswordController => _signpasswordcontroller;
+  // Controllers for Sign In
+  final _signEmailController = TextEditingController();
+  final _signPasswordController = TextEditingController();
+
+  TextEditingController get signEmailController => _signEmailController;
+  TextEditingController get signPasswordController => _signPasswordController;
 
   FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
 
   RxBool _passwordVisible = true.obs;
+  RxBool isLoadingEmail = false.obs;
+  RxBool isLoadingGoogle = false.obs;
+
+  RxBool get passwordVisible => _passwordVisible;
 
   set passwordVisible(RxBool val) {
     _passwordVisible.value = val.value;
   }
 
-  RxBool isloadingemail = false.obs;
-  RxBool isloadinggoogle = false.obs;
-
   String? Function(String? email) get emailValidator =>
       Validators.emailValidator;
-
   String? Function(String? password) get passwordValidator =>
       Validators.passwordValidator;
 
-  RxBool get passwordVisible => _passwordVisible;
-
-// SIGNUP
-  Future signUp(String email, String password) async {
-    isloadingemail.value = true;
-
-    final u = await auth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    user = u.user;
-    isloadingemail.value = false;
-    return true;
+  // Sign Up
+  Future<bool> signUp(String email, String password) async {
+    try {
+      isLoadingEmail.value = true;
+      final u = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      user = u.user;
+      isLoadingEmail.value = false;
+      return true;
+    } catch (e) {
+      isLoadingEmail.value = false;
+      print('Error during sign up: $e');
+      return false;
+    }
   }
 
-  Future signIn(String email, String password) async {
-    isloadingemail.value = true;
-    final u =
-        await auth.signInWithEmailAndPassword(email: email, password: password);
-    user = u.user;
-    print('jjjjj:${u.user?.uid}');
-    isloadingemail.value = false;
+  // Sign In
+  Future<bool> signIn(String email, String password) async {
+    try {
+      isLoadingEmail.value = true;
+      final u = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = u.user;
+      print('User signed in with UID: ${u.user?.uid}');
+      isLoadingEmail.value = false;
+      return true;
+    } catch (e) {
+      isLoadingEmail.value = false;
+      print('Error during sign in: $e');
+      return false;
+    }
+  }
+
+  // Logout
+  Future<void> logout() async {
+    try {
+      await auth.signOut();
+      user = null;
+    } catch (e) {
+      print('Error during logout: $e');
+    }
   }
 
   Future<bool> signOutFromGoogle() async {
     try {
       await FirebaseAuth.instance.signOut();
       return true;
-    } on Exception catch (_) {
+    } catch (e) {
+      print('Error during Google sign out: $e');
       return false;
     }
   }
 
-  Future<void Function()?> logout() async {
-    await auth.signOut();
-
-    return null;
+  @override
+  void onClose() {
+    _emailController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _repasswordController.dispose();
+    _signEmailController.dispose();
+    _signPasswordController.dispose();
+    super.onClose();
   }
-
-  //
 }

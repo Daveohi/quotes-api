@@ -1,9 +1,9 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-// import 'controller/auth_controller.dart';
+import 'controller.dart/auth_controller.dart';
 import 'utils/colors.dart';
 import 'view/splash_screen.dart';
 
@@ -17,7 +17,7 @@ void main() async {
           messagingSenderId: "854781995769",
           projectId: "stage7-7ccae"));
 
-  // Get.put(SignupController());
+  Get.put(AuthController());
   runApp(const ApiQuotes());
 }
 
