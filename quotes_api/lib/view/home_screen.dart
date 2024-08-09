@@ -17,20 +17,46 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 48.h,
         backgroundColor: kGrey,
         title: const Text(
-          'Quotes',
+          'QUOTES',
           style: TextStyle(fontWeight: FontWeight.w500),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(48.w),
+          child: Padding(
+            padding: EdgeInsets.only(left: 16.w, right: 104.w, bottom: 10.h),
+            child: TextField(
+              onChanged: (value) => controller.searchQuotes(value),
+              decoration: InputDecoration(
+                hintText: 'Search for quotes...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: kGrey1,
+              ),
+            ),
+          ),
         ),
         actions: [
           InkWell(
             onTap: () {
               Get.to(() => const ProfileScreen());
             },
-            child: Image.asset(
-              'assets/icons/person.png',
-              width: 20.w,
+            child: Row(
+              children: [
+                Text(
+                  'Profile  ',
+                  style: TextStyle(fontSize: 18.w),
+                ),
+                Image.asset(
+                  'assets/icons/person.png',
+                  width: 20.w,
+                ),
+              ],
             ),
           ),
           SizedBox(
