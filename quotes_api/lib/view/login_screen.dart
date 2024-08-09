@@ -174,7 +174,7 @@ class SignIn extends StatelessWidget {
                                         controller.signpasswordController.text,
                                       );
                                       print('ressssssssss:$res');
-                                      Get.offAll(() => const HomeScreen());
+                                      Get.offAll(() => HomeScreen());
                                     }
                                   }
                                 } on FirebaseAuthException catch (e) {
