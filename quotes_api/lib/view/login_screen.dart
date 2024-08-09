@@ -19,7 +19,7 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SignupController controller = Get.put(SignupController());
+    final AuthController controller = Get.put(AuthController());
 
     final _formKey = GlobalKey<FormState>();
 
@@ -77,7 +77,7 @@ class SignIn extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     color: kblack,
                                     fontFamily: 'Inter'),
-                                controller: controller.signemailController,
+                                controller: controller.signEmailController,
                                 validator: controller.emailValidator,
                                 decoration: InputDecoration(
                                     focusedErrorBorder: InputBorder.none,
@@ -109,7 +109,7 @@ class SignIn extends StatelessWidget {
                               height: 48,
                               child: TextFormField(
                                 obscureText: controller.passwordVisible.value,
-                                controller: controller.signpasswordController,
+                                controller: controller.signPasswordController,
                                 keyboardType: TextInputType.visiblePassword,
                                 validator: controller.passwordValidator,
                                 decoration: InputDecoration(
@@ -170,8 +170,8 @@ class SignIn extends StatelessWidget {
 
                                     if (_formKey.currentState!.validate()) {
                                       final res = await controller.signIn(
-                                        controller.signemailController.text,
-                                        controller.signpasswordController.text,
+                                        controller.signEmailController.text,
+                                        controller.signPasswordController.text,
                                       );
                                       print('ressssssssss:$res');
                                       Get.offAll(() => HomeScreen());
@@ -180,7 +180,7 @@ class SignIn extends StatelessWidget {
                                 } on FirebaseAuthException catch (e) {
                                   var message = e.message;
                                   _showalertdialog(message.toString(), context);
-                                  controller.isloadingemail.value = false;
+                                  controller.isLoadingEmail.value = false;
                                 }
                               },
                               child: Container(
@@ -190,7 +190,7 @@ class SignIn extends StatelessWidget {
                                       color: kblack,
                                       borderRadius: BorderRadius.circular(16)),
                                   child: Center(
-                                      child: controller.isloadingemail.value ==
+                                      child: controller.isLoadingEmail.value ==
                                               false
                                           ? const Text(
                                               'Sign In',

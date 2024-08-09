@@ -6,7 +6,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:quotes_api/controller.dart/homecontroller.dart';
 
 import '../utils/colors.dart';
-import 'profile.dart';
+import 'profile_Screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
