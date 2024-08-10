@@ -20,7 +20,6 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController controller = Get.put(AuthController());
     final _formKey = GlobalKey<FormState>();
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
@@ -40,7 +39,7 @@ class Signup extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: const Icon(
-                          Icons.arrow_back,
+                          Icons.wifi_rounded,
                           color: kblack,
                           size: 26,
                         ),
@@ -78,7 +77,7 @@ class Signup extends StatelessWidget {
                           validator: controller.emailValidator,
                           decoration: InputDecoration(
                               focusedErrorBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.all(4),
+                              contentPadding: const EdgeInsets.all(4),
                               hintText: 'Enter email',
                               hintStyle: const TextStyle(
                                   fontSize: 14,
@@ -111,7 +110,7 @@ class Signup extends StatelessWidget {
                           obscureText: controller.passwordVisible.value,
                           decoration: InputDecoration(
                             focusedErrorBorder: InputBorder.none,
-                            contentPadding: EdgeInsets.all(4),
+                            contentPadding: const EdgeInsets.all(4),
                             focusColor: kblack,
                             hintText: 'Enter password',
                             hintStyle: const TextStyle(
@@ -140,7 +139,7 @@ class Signup extends StatelessWidget {
                                       ),
                               ),
                             ),
-                            suffixIconConstraints: BoxConstraints(
+                            suffixIconConstraints: const BoxConstraints(
                               maxHeight: 24,
                               maxWidth: 24,
                               minHeight: 24,
