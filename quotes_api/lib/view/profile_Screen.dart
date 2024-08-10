@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:firebase_auth_platform_interface/src/providers/phone_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +8,6 @@ import 'package:quotes_api/utils/colors.dart';
 import 'package:quotes_api/view/login_screen.dart';
 import 'package:quotes_api/widget/custom_button.dart';
 import '../controller.dart/auth_controller.dart';
-// import '../controller/signup_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -40,11 +37,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final user = _authController.auth.currentUser;
-
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blueGrey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -126,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Column(
                         children: [
                           Text(
-                            '${user?.displayName ?? 'Name'}',
+                            user?.displayName ?? 'Name',
                             style: TextStyle(fontSize: 12.h),
                           ),
                           Text(
@@ -181,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Text(
                 'Date: ${user?.metadata.creationTime?.toString() ?? ''}',
-                style: TextStyle(color: Colors.grey, fontSize: 15.h),
+                style: TextStyle(color: kwhite, fontSize: 15.h),
               ),
               SizedBox(
                 height: 15.h,
@@ -192,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Text(
                 'Share the app  with friends',
-                style: TextStyle(color: Colors.grey, fontSize: 15.h),
+                style: TextStyle(color: kwhite, fontSize: 15.h),
               ),
               SizedBox(
                 height: 15.h,
@@ -210,11 +206,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Text(
                         'Toggle the switch to\nauto update the app or not. ',
-                        style: TextStyle(color: Colors.grey, fontSize: 15.h),
+                        style: TextStyle(color: kwhite, fontSize: 15.h),
                       ),
                     ],
                   ),
                   CupertinoSwitch(
+                    activeColor: kblack,
+                    trackColor: Colors.grey,
                     value: _switchValue,
                     onChanged: (bool value) {
                       setState(() {
@@ -233,19 +231,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Text(
                 'You can choose our paid plans\nto enjoy more benefits. ',
-                style: TextStyle(color: Colors.grey, fontSize: 15.h),
+                style: TextStyle(color: kwhite, fontSize: 15.h),
               ),
               SizedBox(
-                height: 15.h,
+                height: 25.h,
               ),
-              GestureDetector(
-                onTap: () async {
-                  await _authController.logout();
-                  Get.offAll(() => const SignIn());
-                },
-                child: Text(
-                  'Logout',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.h),
+              Center(
+                child: CustomButton(
+                  width: 80.w,
+                  onPressed: () async {
+                    await _authController.logout();
+                    Get.offAll(() => const SignIn());
+                  },
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(
+                        color: kwhite,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20.h),
+                  ),
                 ),
               ),
             ],
@@ -259,10 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       final user = _authController.auth.currentUser;
       if (user != null) {
-        // Update the user's profile information
         await user.updateDisplayName(_nameController.text);
-        // await user
-        //     .updatePhoneNumber(_phoneController.text);
         Get.snackbar(
           'Profile Updated',
           'Your profile has been successfully updated.',

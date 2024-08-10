@@ -36,7 +36,7 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
 
-  RxBool _passwordVisible = true.obs;
+  final RxBool _passwordVisible = true.obs;
   RxBool isLoadingEmail = false.obs;
   RxBool isLoadingGoogle = false.obs;
 

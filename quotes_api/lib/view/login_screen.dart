@@ -1,13 +1,9 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:quotes/view/signup_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 import '../controller.dart/auth_controller.dart';
 import '../utils/colors.dart';
 import '../widget/spacing.dart';
@@ -20,9 +16,7 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthController controller = Get.put(AuthController());
-
     final _formKey = GlobalKey<FormState>();
-
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
@@ -42,7 +36,7 @@ class SignIn extends StatelessWidget {
                                 Navigator.pop(context);
                               },
                               child: const Icon(
-                                Icons.arrow_back,
+                                Icons.wifi_rounded,
                                 color: kblack,
                                 size: 26,
                               ),
@@ -81,7 +75,7 @@ class SignIn extends StatelessWidget {
                                 validator: controller.emailValidator,
                                 decoration: InputDecoration(
                                     focusedErrorBorder: InputBorder.none,
-                                    contentPadding: EdgeInsets.all(4),
+                                    contentPadding: const EdgeInsets.all(4),
                                     hintText: 'Enter email',
                                     hintStyle: const TextStyle(
                                         fontSize: 14,
@@ -161,13 +155,6 @@ class SignIn extends StatelessWidget {
                                     } else {
                                       return _showalertdialog('', context);
                                     }
-
-                                    // await controller.signUp(
-                                    //   controller.emailController.text,
-                                    //   controller.passwordController.text,
-                                    // );
-                                    // Get.offAll(() => const Username());
-
                                     if (_formKey.currentState!.validate()) {
                                       final res = await controller.signIn(
                                         controller.signEmailController.text,
@@ -184,14 +171,14 @@ class SignIn extends StatelessWidget {
                                 }
                               },
                               child: Container(
-                                  height: 56,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      color: kblack,
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: Center(
-                                      child: controller.isLoadingEmail.value ==
-                                              false
+                                height: 56,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: kblack,
+                                    borderRadius: BorderRadius.circular(16)),
+                                child: Center(
+                                  child:
+                                      controller.isLoadingEmail.value == false
                                           ? const Text(
                                               'Sign In',
                                               style: TextStyle(
@@ -202,10 +189,10 @@ class SignIn extends StatelessWidget {
                                             )
                                           : const CircularProgressIndicator(
                                               color: kwhite,
-                                            ))),
+                                            ),
+                                ),
+                              ),
                             ),
-
-                            //
                           ],
                         ),
                       ),

@@ -6,6 +6,7 @@ class Constants {
   static String url = 'https://dummyjson.com';
   static String endPoint = '/quotes';
 
+  // ignore: unused_element
   Future<void> _getQuotes() async {
     final url = Uri.parse(Constants.url + Constants.endPoint);
     final response = await http.get(url);

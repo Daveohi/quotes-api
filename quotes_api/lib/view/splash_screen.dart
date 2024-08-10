@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:get/get_navigation/get_navigation.dart';
-// import 'package:quotes/view/login_screen.dart';
-// import 'package:quotes/view/signup_screen.dart';
-
 import '../utils/colors.dart';
 import '../widget/custom_button.dart';
 import 'login_screen.dart';
@@ -18,18 +12,14 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kwhite,
       body: Column(
         children: [
           Flexible(child: Image.asset('assets/images/pencil_tree.png')),
           const Text(
             'Quotes',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
           ),
-          // Image.asset(
-          //   'assets/images/logo_row.png',
-          //   width: 104.w,
-          // ),
           SizedBox(
             height: 7.h,
           ),
@@ -66,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                 CustomButton(
                   text: 'Login',
                   onPressed: () {
-                    Get.offAll(() => SignIn());
+                    Get.offAll(() => const SignIn());
                   },
                   fillColor: kGrey,
                   textColor: Colors.black,
