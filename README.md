@@ -18,6 +18,8 @@ To start using Quotes_API, follow these simple steps:
 ### Prerequisites
 - Ensure you have a compatible android device
 - Ensure your device is connected to internet
+- Login:daveohimai@gmail.com
+- password: 12345678
 ### Download
 - [APK DOWNLOAD](https://drive.google.com/file/d/1U-VfzshsCbYoKe7W8pibx7r8SnfYQH_l/view?usp=sharing)
 ### Usage
